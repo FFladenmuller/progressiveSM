@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+{% extends "layout.html" %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block main %}
+    <main class="container p-5">
+        <form action="/register" method="post" id = "registerForm">
+            <div class="form-group mb-3" id ="user">
+                <label for="username">Username</label>
+                <input autocomplete="off" autofocus class="form-control" name="username" id = "username" placeholder="Username" type="text"/>
+            </div>
+            <div class="form-group mb-3" id = "pw">
+                <label for="username">Password</label>
+                <input class="form-control" name="password" id = "password" placeholder="Password" type="password"/>
+            </div>
+            <div class="form-group mb-3" id = "con">
+                <label for="confirmation">Re-Enter Password</label>
+                <input class="form-control" name="confirmation" id = "confirmation" placeholder="Password Confirmation" type="password"/>
+            </div>
+            <div class="form-group mb-3" id = "em">
+                <label for="email">Email (Optional)</label>
+                <input class="form-control" name="email" id = "email" placeholder="Email" type="email"/>
+            </div>
+            <button class="btn btn-primary mb-3" id = "submitButton" type="submit">Register</button>
+        </form>
+        <script src = "static/helpers/validateForm.js"></script>
+        <script src = "static/registerJs/regCon.js"></script>
+        <script src = "static/registerJs/regEmail.js"></script>
+        <script src = "static/registerJs/regPw.js"></script>
+        <script src = "static/registerJs/regUser.js"></script>
+        <script src = "static/registerJs/register.js"></script>
+    </main>
+{% endblock %}

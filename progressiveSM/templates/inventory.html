@@ -1,0 +1,273 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Inventory
+{% endblock %}
+
+{% block main %}
+
+<main class="container-fluid">
+    <div class = "row">
+
+        <!--- LEFT COLUMN ---->
+        <div class="col-sm-2" style = "border-right: 1px solid lightgrey">
+            <legend>Filters</legend>
+
+            <!--- SHAPE RADIO BUTTON GROUP --->
+            <div class="form-group left-nav">
+                <label>Shape</label>
+                <div class="form-check">
+                <label class="form-check-label">
+                  <input type="radio" class="form-check-input" name="shapeRadio" id="allRad" value="all" checked ="">
+                  All
+                </label>
+              </div>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input type="radio" class="form-check-input" name="shapeRadio" id="squareRadio" value="Square">
+                  Square
+                </label>
+              </div>
+              <div class="form-check">
+              <label class="form-check-label">
+                  <input type="radio" class="form-check-input" name="shapeRadio" id="roundRadio" value="Round">
+                  Round
+                </label>
+              </div>
+              <div class="form-check">
+              <label class="form-check-label">
+                  <input type="radio" class="form-check-input" name="shapeRadio" id="ovalRadio" value="Oval">
+                  Oval
+                </label>
+              </div>
+          </div>
+
+        <!--- PRICE TEXT BOX INPUT GROUP ---->
+        <div class="form-group left-nav">
+          <label>Price</label>
+             <div class="row">
+                 <div class="col">
+                      <div class="input-group mb-3">
+                              <div class="input-group-prepend">
+                            <span class="input-group-text">$</span>
+                          </div>
+                          <input type="text" class="form-control" id="minPrice" placeholder="min"></input>
+                      </div>
+                  </div>
+                  <div class="col">
+                      <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                              <span class="input-group-text">$</span>
+                          </div>
+                          <input type="text" class="form-control" id="maxPrice" placeholder="max"></input>
+                      </div>
+                  </div>
+                  </div>
+                  <form class="text-center">
+                      <button class="btn btn-secondary" id= "priceBtn" type="button">Go</button>
+                  </form>
+        </div>
+
+        <!---- ROUND DIAMETER INPUT BOX GROUP ---->
+        <div class="form-group left-nav">
+          <label>Round Diameter</label>
+              <div class="input-group mb-3">
+                  </div>
+                  <input type="text" class="form-control" id="minPrice" placeholder="Diameter"></input>
+              </div>
+        <div>
+
+        <!---- ROUND TYPE CHECKBOX GROUP ----->
+            </div>
+            <div class = "form-group left-nav">
+                <label>Round Types</label>
+                {% for roundType in roundTypes %}
+                    <div class="form-check">
+                        <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" value={{roundType["type"]}} checked="">
+                        {{roundType["type"]}}
+                        </label>
+                    </div>
+                {% endfor %}
+                </div>
+        </div>
+
+        <!---- RIGHT COLUMN ---->
+
+        <!--- SEARCH BAR ----->
+        <div class="col-10">
+            <div class="form-group mt-3">
+                <div class ="row">
+                    <div class="col">
+                        <input autocomplete="off" autofocus class="form-control" id = 'q' name="search" placeholder="Search!" type="text"/>
+                    </div>
+                    <div class="col"></div>
+                        <form>
+                            <button class="btn btn-primary" id= "clear" type="submit">Clear Search</button>
+                        </form>
+                    </div>
+
+                </div>
+
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th><button type="button" class="btn btn-info" data-toggle="modal" data-target="#addModal"><i class="material-icons">add</i></button></th>
+                        <th scope="col">Shape</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Dimensions</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Notes</th>
+                        <th scope="col">Location</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id = "tbody">
+                    {% for item in inventory %}
+                    <tr id ={{item["id"]}}>
+                        <td><button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#editModal"
+                        data-shape="{{item["shape"]}}"
+                        data-type="{{item["type"]}}"
+                        data-dimension_one="{{item["dimension_one"]}}"
+                        data-dimension_two="{{item["dimension_two"]}}"
+                        data-quantity="{{item["quantity"]}}"
+                        data-id="{{item["id"]}}"
+                        data-notes="{{item["notes"]}}"
+                        data-location="{{item["location"]}}"
+                        ><i class="material-icons">edit</i></button></td>
+                        <td> {{item["shape"]}}</td>
+                        <td> {{item["type"]}}</td>
+                        <td> {{item["quantity"]}}</td>
+                        {% if item["shape"] == "Square" %}
+                            <td> {{item["dimension_one"]}} X {{item["dimension_two"]}}</td>
+                        {% elif item["type"] == "Reducer" %}
+                            <td> {{item["dimension_one"]}} : {{item["dimension_two"]}}</td>
+                        {% else %}
+                            <td> {{item["dimension_one"]}}</td>
+                        {% endif %}
+                        <td> {{item["price"]}}</td>
+                        <td> {{item["notes"]}}</td>
+                        <td> {{item["location"]}}</td>
+                        <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="deleteModal"><i class="material-icons">delete</i></button></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <!-- http://handlebarsjs.com/ -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+    <script src="/static/helpers/validateForm.js"></script>
+    <script src="/static/inventoryJs/search.js"></script>
+    <script src="/static/inventoryJs/filters.js"></script>
+    <script src="/static/inventoryJs/eModalValidate.js"></script>
+    <script src="/static/inventoryJs/eModal.js"></script>
+</main>
+
+            <!-- Add Modal -->
+    <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModal" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            ...
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    </div>
+
+
+                <!-- Edit Modal -->
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModal" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="editModalLabel"></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+             <div class="form-group">
+                  <label>Quantity:</label>
+                  <div class="row">
+                      <div class="col">
+                          <select class="form-control" id="qtSelect">
+                            <option>Set to</option>
+                            <option>Add</option>
+                            <option>Subtract</option>
+                          </select>
+                      </div>
+                      <div class="col" id= "qtD">
+                          <input type="text" class="form-control" id="qt" placeholder="Quantity">
+                      </div>
+                  </div>
+              </div>
+            <div class="form-group" id="prD">
+              <label>Price:</label>
+              <input type="text" class="form-control" id="pr" placeholder="Enter new price here...">
+            </div>
+            <div class="form-group">
+                  <label>Notes:</label>
+                  <div class="row">
+                      <div class="col">
+                          <select class="form-control" id="ntSelect">
+                            <option>Set notes to:</option>
+                            <option>Add to notes:</option>
+                          </select>
+                      </div>
+                      <div class="col">
+                          <input type="text" class="form-control" id="ntInput" placeholder="Enter notes here...">
+                      </div>
+                  </div>
+              </div>
+              <div class="form-group">
+              <label>Location:</label>
+              <input type="text" class="form-control" id="loc" placeholder="Enter new location here...">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" id="svBtn" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    </div>
+
+                    <!-- Delete Modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            ...
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    </div>
+
+{% endblock %}
