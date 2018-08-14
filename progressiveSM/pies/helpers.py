@@ -1,4 +1,4 @@
-from cs50 import SQL
+from models import User
 
 # Configure database
 db = SQL("sqlite:///PSM.db")
@@ -18,5 +18,4 @@ def login_required(f):
 
 # Query database for row with username
 def check_for_username(username):
-    return db.execute("SELECT * FROM users WHERE username = :username",
-                          username = username)
+    return User.query.filter_by(username=username)

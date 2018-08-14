@@ -1,8 +1,9 @@
 from flask import Flask, render_template, flash, redirect, request, session, jsonify
-from flask.ext.session import Session
+from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
-from cs50 import SQL
+import os
 import pdb
+from flask_sqlalchemy import SQLAlchemy
 import sys
 
 sys.path.insert(0, './pies/')
@@ -10,6 +11,9 @@ from inventory import inventory
 from notLogged import notLogged
 from order import orderStuff
 from helpers import *
+
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False 
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 
 # Configure application
 app = Flask(__name__)

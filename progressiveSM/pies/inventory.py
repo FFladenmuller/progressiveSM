@@ -1,16 +1,20 @@
 from flask import Blueprint
+from models import Inventory
 
 inventory = Blueprint('inventory', __name__)
 
 @inventory.route('/inventoryDisplay', methods=["GET", "POST"])
 def inventoryDisplay():
     ''' Return inventory table and types from inventory for filters'''
-    inv = db.execute("SELECT * FROM Inventory")
-    roundTypes = db.execute("SELECT type FROM Inventory WHERE shape == \"Round\"")
-    squareTypes = db.execute("SELECT type FROM Inventory WHERE shape == \"Square\"")
-    ovalTypes = db.execute("SELECT type FROM INVENTORY WHERE shape == \"Oval\"")
+    inv = Inventory.query.all()
+    roundTypes = Inventory.query.filter_by(shape="Round").all()
+    squareTypes = Inventory.query.filter_by(shape="Square").all()
+    ovalTypes = Inventory.query.filter_by(shape="Oval").all()
     return render_template("inventory.html", inventory = inv, roundTypes = roundTypes, squareTypes = squareTypes, ovalTypes = ovalTypes)
 
+
+User.query.filter_by(username=username)
+Inventory.query.filter_by(shape="Oval") 
 @inventory.route('/searchInventory')
 def searchInventory():
     if not request.args.get("q"):
@@ -37,5 +41,5 @@ def priceFilter():
         raise RuntimeError("missing maxPrice")
     minPrice = request.args.get("minPrice")
     maxPrice = request.args.get("maxPrice")
-    rows = db.execute("SELECT * FROM inventory WHERE price BETWEEN :minPrice AND :maxPrice", minPrice = minPrice, maxPrice = maxPrice)
+    rows = Inventory.query.where(between(Inventory.price, minPrice, maxPrice))
     return jsonify(rows)

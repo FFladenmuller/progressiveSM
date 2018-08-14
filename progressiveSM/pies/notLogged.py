@@ -1,4 +1,5 @@
 from flask import Blueprint
+from mdoels import User
 
 notLogged = Blueprint('notLogged', __name__)
 
@@ -22,8 +23,9 @@ def register():
 
         # Hash Password, Insert user into DB
         hashpw = generate_password_hash(password=request.form.get("password"), method='pbkdf2:sha256', salt_length=8)
-        db.execute("INSERT INTO users(username, hash, email) VALUES(:username, :hashPw, :email)",
-        username = username, hashPw = hashpw, email = request.form.get("email"))
+        user = User(username = username, hash = hashPw, email = request.form.get("email"))
+        db.session.add(user)
+        db.session.commit()
 
         #Log user in, show success
         rows = check_for_username(request.form.get("username"))
