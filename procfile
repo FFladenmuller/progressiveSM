@@ -1,1 +1,1 @@
-web: gunicorn app:progressiveSM
+web: gunicorn progressiveSM:app
