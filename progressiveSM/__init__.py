@@ -7,10 +7,10 @@ from flask_sqlalchemy import SQLAlchemy
 import sys
 
 sys.path.insert(0, './pies/')
-from inventory import inventory
-from notLogged import notLogged
-from order import orderStuff
-from helpers import *
+from pies.inventory import inventory
+from pies.notLogged import notLogged
+from pies.order import orderStuff
+from pies.helpers import *
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False 
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
