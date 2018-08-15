@@ -6,7 +6,7 @@ import pdb
 from flask_sqlalchemy import SQLAlchemy
 import sys
 
-sys.path.insert(0, './pies/')
+sys.path.insert(0, './progressiveSM/pies/')
 from pies.inventory import inventory
 from pies.notLogged import notLogged
 from pies.order import orderStuff
