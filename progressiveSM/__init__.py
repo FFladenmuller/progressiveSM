@@ -7,10 +7,10 @@ from flask_sqlalchemy import SQLAlchemy
 import sys
 
 sys.path.insert(0, './progressiveSM/pies/')
-from pies.inventory import inventory
-from pies.notLogged import notLogged
-from pies.order import orderStuff
-from pies.helpers import *
+from progressiveSM.pies.inventory import inventory
+from progressiveSM.pies.notLogged import notLogged
+from progressiveSM.pies.order import orderStuff
+from progressiveSM.pies.helpers import *
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False 
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
