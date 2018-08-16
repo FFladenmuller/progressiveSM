@@ -9,11 +9,11 @@ db = SQLAlchemy(app)
 
 class User(db.model):
 	id = db.Column(db.Integer, primary_key=True)
-	username = db.Column(db.String, unique = true)
+	username = db.Column(db.String, unique = True)
 	hash = db.Column(db.String)
-	validated = db.Column(db.Integer,default=0)
-    email = db.Column(db.String)
-
+	validated = db.Column(db.Integer, default = 0)
+	email = db.Column(db.String)
+    
 class Inventory(db.model):
 	id = db.Column(db.Integer, primary_key=True)
 	quantity = db.Column(db.Integer)
