@@ -25,5 +25,5 @@ class Inventory(db.Model):
 	date_updated = db.Column(db.DateTime, default=datetime.now)
 
 class inventoryTxt(db.Model):
-    info = db.Column(db.String)
+    info = db.Column(db.String, primary_key=True)
     tsv = db.Column(TSVECTOR)
