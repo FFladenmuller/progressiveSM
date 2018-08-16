@@ -6,16 +6,14 @@ import pdb
 from flask_sqlalchemy import SQLAlchemy
 import sys
 
-sys.path.insert(0, './progressiveSM/pies/')
-
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False 
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
-
 # Configure application
 app = Flask(__name__)
 app.run(host="0.0.0.0", port=8080, threaded=True)
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
+
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False 
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 
 # Configure database
 db = SQLAlchemy(app)
@@ -31,6 +29,7 @@ app.register_blueprint(inventory)
 app.register_blueprint(orderStuff)
 app.register_blueprint(notLogged)
 
+sys.path.insert(0, './progressiveSM/pies/')
 from progressiveSM.pies.inventory import inventory
 from progressiveSM.pies.notLogged import notLogged
 from progressiveSM.pies.order import orderStuff
