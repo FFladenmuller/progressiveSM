@@ -8,7 +8,6 @@ import sys
 
 # Configure application
 app = Flask(__name__)
-app.run(host="0.0.0.0", port=8080, threaded=True)
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
