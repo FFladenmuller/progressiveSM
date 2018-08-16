@@ -13,8 +13,6 @@ def inventoryDisplay():
     return render_template("inventory.html", inventory = inv, roundTypes = roundTypes, squareTypes = squareTypes, ovalTypes = ovalTypes)
 
 
-User.query.filter_by(username=username)
-Inventory.query.filter_by(shape="Oval") 
 @inventory.route('/searchInventory')
 def searchInventory():
     if not request.args.get("q"):
