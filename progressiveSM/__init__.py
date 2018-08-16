@@ -7,10 +7,6 @@ from flask_sqlalchemy import SQLAlchemy
 import sys
 
 sys.path.insert(0, './progressiveSM/pies/')
-from progressiveSM.pies.inventory import inventory
-from progressiveSM.pies.notLogged import notLogged
-from progressiveSM.pies.order import orderStuff
-from progressiveSM.pies.helpers import *
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False 
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
@@ -22,7 +18,7 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 # Configure database
-db = SQL("sqlite:///PSM.db")
+db = SQLAlchemy(app)
 
 @app.after_request
 def after_request(response):
@@ -34,6 +30,12 @@ def after_request(response):
 app.register_blueprint(inventory)
 app.register_blueprint(orderStuff)
 app.register_blueprint(notLogged)
+
+from progressiveSM.pies.inventory import inventory
+from progressiveSM.pies.notLogged import notLogged
+from progressiveSM.pies.order import orderStuff
+from progressiveSM.pies.models import *
+from progressiveSM.pies.helpers import *
 
 @app.route("/logout")
 def logout():
@@ -62,5 +64,4 @@ def passwordCheck():
         return jsonify(result = False)
     else:
         return jsonify(result = True)
-
 

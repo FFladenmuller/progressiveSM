@@ -3,10 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from sqlalchemy.dialects.postgresql import TSVECTOR
 import os
-
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
-
-db = SQLAlchemy(app)
+from app import db
 
 class User(db.model):
 	id = db.Column(db.Integer, primary_key=True)
