@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from sqlalchemy.dialects.postgresql import TSVECTOR
 import os
-from app import db
+from progressiveSM import db
 
 class User(db.model):
 	id = db.Column(db.Integer, primary_key=True)
