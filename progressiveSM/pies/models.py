@@ -5,14 +5,14 @@ from sqlalchemy.dialects.postgresql import TSVECTOR
 import os
 from progressiveSM import db
 
-class User(db.model):
+class User(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
 	username = db.Column(db.String, unique = True)
 	hash = db.Column(db.String)
 	validated = db.Column(db.Integer, default = 0)
 	email = db.Column(db.String)
     
-class Inventory(db.model):
+class Inventory(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
 	quantity = db.Column(db.Integer)
 	dimension_one = db.Column(db.String)
@@ -24,6 +24,6 @@ class Inventory(db.model):
 	notes = db.Column(db.String)
 	date_updated = db.Column(db.DateTime, default=datetime.now)
 
-class inventoryTxt(db.model):
+class inventoryTxt(db.Model):
     info = db.Column(db.String)
     tsv = db.Column(db.TSVECTOR)
