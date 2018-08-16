@@ -1,5 +1,5 @@
 from flask import Blueprint
-from mdoels import User
+from models import User
 
 notLogged = Blueprint('notLogged', __name__)
 
