@@ -26,4 +26,4 @@ class Inventory(db.Model):
 
 class inventoryTxt(db.Model):
     info = db.Column(db.String)
-    tsv = db.Column(db.TSVECTOR)
+    tsv = db.Column(TSVECTOR)
