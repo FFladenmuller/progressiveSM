@@ -1,4 +1,4 @@
-from flask import Blueprint
+from flask import Blueprint, request,render_template
 
 orderStuff = Blueprint('orderStuff', __name__)
 

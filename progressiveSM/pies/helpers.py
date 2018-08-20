@@ -1,7 +1,7 @@
-from models import User
-
-# Configure database
-db = SQL("sqlite:///PSM.db")
+from flask import redirect, session
+from flask_session import Session
+from functools import wraps
+from progressiveSM import db 
 
 def login_required(f):
     """

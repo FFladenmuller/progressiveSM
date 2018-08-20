@@ -1,5 +1,9 @@
-from flask import Blueprint
+from flask import Blueprint, render_template, redirect, session, request
+from flask_session import Session
 from models import User
+from helpers import check_for_username
+from progressiveSM import db
+from werkzeug.security import generate_password_hash
 
 notLogged = Blueprint('notLogged', __name__)
 
@@ -22,7 +26,7 @@ def register():
         username = request.form.get("username")
 
         # Hash Password, Insert user into DB
-        hashpw = generate_password_hash(password=request.form.get("password"), method='pbkdf2:sha256', salt_length=8)
+        hashPw = generate_password_hash(password=request.form.get("password"), method='pbkdf2:sha256', salt_length=8)
         user = User(username = username, hash = hashPw, email = request.form.get("email"))
         db.session.add(user)
         db.session.commit()
