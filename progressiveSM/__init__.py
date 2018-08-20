@@ -47,7 +47,7 @@ def users():
     '''check to see if user exists'''
     if not request.args.get("username"):
         raise RuntimeError("missing username")
-    if db.execute("SELECT * FROM users WHERE username = :username", username = request.args.get("username")):
+    if User.query.filter_by(username=request.args.get("username")):
         return jsonify(result = True)
     else:
         return jsonify(result = False)
