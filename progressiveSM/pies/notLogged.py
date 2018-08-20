@@ -20,7 +20,8 @@ def contact():
 
 @notLogged.route('/register', methods=["GET", "POST"])
 def register():
-    ''' Register the homies'''
+    ''' Register user. Validation done in javascript, 
+        checks for taken user name via /users'''
     if request.method == "POST":
         username = request.form.get("username")
 
@@ -31,18 +32,18 @@ def register():
         db.session.commit()
 
         #Log user in, show success
-        rows = check_for_username(request.form.get("username"))
-        session["user_id"] = rows[0]["id"]
-        username = rows[0]["username"]
-        return render_template('/registrationSuccess.html', username = username)
+        loggedUser = check_for_username(request.form.get("username"))
+        session["user_id"] = loggedUser.id
+        return render_template('/registrationSuccess.html', username = loggedUser.username)
     else:
         return render_template('register.html')
 
 @notLogged.route('/login', methods=["GET", "POST"])
 def login():
-    '''Log some people in'''
+    '''Logs user in'''
     if request.method == "POST":
-        session["user_id"] = check_for_username(request.form.get("username"))[0]["id"]
+        loggedUser = check_for_username(request.form.get("username"))
+        session["user_id"] = loggedUser.id
         return redirect('/')
     else:
         return render_template('login.html')

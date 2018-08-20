@@ -29,7 +29,7 @@ from progressiveSM.pies.inventory import inventory
 from progressiveSM.pies.notLogged import notLogged
 from progressiveSM.pies.order import orderStuff
 from progressiveSM.pies.models import *
-from progressiveSM.pies.helpers import login_required, check_for_username
+from progressiveSM.pies.helpers import *
 
 app.register_blueprint(inventory)
 app.register_blueprint(orderStuff)
@@ -41,25 +41,4 @@ def logout():
     # Forget any user_id
     session.clear()
     return redirect("/")
-
-@app.route('/users')
-def users():
-    '''check to see if user exists'''
-    if not request.args.get("username"):
-        raise RuntimeError("missing username")
-    if User.query.filter_by(username=request.args.get("username")):
-        return jsonify(result = True)
-    else:
-        return jsonify(result = False)
-
-@app.route('/passwordCheck')
-def passwordCheck():
-    ''' See if given password in url matches given username in url'''
-    if not request.args.get("username"):
-        raise RuntimeError("missing username")
-    rows = check_for_username(request.args.get("username"))
-    if not check_password_hash(rows[0]["hash"], request.args.get("password")):
-        return jsonify(result = False)
-    else:
-        return jsonify(result = True)
 

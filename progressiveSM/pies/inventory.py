@@ -7,7 +7,7 @@ inventory = Blueprint('inventory', __name__)
 
 @inventory.route('/inventoryDisplay', methods=["GET", "POST"])
 def inventoryDisplay():
-    ''' Return inventory table and types from inventory for filters'''
+    ''' Return inventory table and fitting types from inventory for filters on sidebar'''
     inv = Inventory.query.all()
     roundTypes = Inventory.query.filter_by(shape="Round").all()
     squareTypes = Inventory.query.filter_by(shape="Square").all()
@@ -17,6 +17,7 @@ def inventoryDisplay():
 
 @inventory.route('/searchInventory')
 def searchInventory():
+    ''' Searches FTS Postgres table for query typed into typeahead bar on inventory page'''
     if not request.args.get("q"):
         raise RuntimeError("missing q")
     keywords = request.args.get("q")
@@ -34,7 +35,7 @@ def editInventory():
 
 @inventory.route('/priceFilter')
 def priceFilter():
-    ''' Returns rows where they meet price criteria'''
+    ''' Returns rows where they meet price criteria for price Filter on inventory page'''
     if not request.args.get("minPrice"):
         raise RuntimeError("missing minPrice")
     elif not request.args.get("maxPrice"):
