@@ -25,15 +25,16 @@ def after_request(response):
     return response
     
 sys.path.insert(0, './progressiveSM/pies/')
+from progressiveSM.pies.models import *
+from progressiveSM.pies.helpers import *
 from progressiveSM.pies.inventory import inventory
 from progressiveSM.pies.notLogged import notLogged
 from progressiveSM.pies.order import orderStuff
-from progressiveSM.pies.models import *
-from progressiveSM.pies.helpers import *
 
 app.register_blueprint(inventory)
 app.register_blueprint(orderStuff)
-app.register_blueprint(notLogged)   
+app.register_blueprint(notLogged) 
+app.register_blueprint(helpers)  
 
 @app.route("/logout")
 def logout():
