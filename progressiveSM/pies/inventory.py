@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, session, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import between
-from progressiveSM import db
+from progressiveSM import db, Inventory
 
 inventory = Blueprint('inventory', __name__)
 
