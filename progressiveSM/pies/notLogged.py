@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, redirect, session, request
 from flask_session import Session
 from helpers import check_for_username
-from progressiveSM import db
+from progressiveSM import db, User
 from werkzeug.security import generate_password_hash
 
 notLogged = Blueprint('notLogged', __name__)

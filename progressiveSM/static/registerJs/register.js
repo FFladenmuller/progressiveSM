@@ -1,14 +1,5 @@
 // If form is submitted validate form.
 $("#registerForm").submit(function(event){
-    if (!validForm())
-    {
-        event.preventDefault();
-        return false;
-    }
-})
-
-function validForm()
-{
     validateUsername();
     passwordSecureEnough();
     checkEmail();
@@ -23,7 +14,8 @@ function validForm()
            }
            else
            {
+               event.preventDefault();
                return false;
            }
      })
-}
+})
