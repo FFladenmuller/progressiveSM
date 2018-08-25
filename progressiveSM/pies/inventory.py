@@ -78,7 +78,7 @@ def addItem():
 
     history_item =  inventoryHistory(quantity = quantity, dimension_one = dimension_one, 
                      dimension_two = dimension_two, shape = shape, 
-                     type = type, date_update = datetime.datetime.now())
+                     type = type, date_updated = datetime.datetime.now())
     
     db.session.add(item)
     db.session.add(history_item)
