@@ -2,6 +2,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from sqlalchemy.dialects.postgresql import TSVECTOR
+from sqlalchemy.sql import func
 import os
 from progressiveSM import db
 
@@ -26,7 +27,7 @@ class Inventory(db.Model):
 	type = db.Column(db.String)
 	location = db.Column(db.String)
 	notes = db.Column(db.String)
-	date_updated = db.Column(db.DateTime, default=datetime.datetime.now())
+	date_updated = db.Column(db.DateTime, server_default=func.now())
 
 class inventoryHistory(db.Model):
 	id = db.Column(db.Integer, primary_key =True)
@@ -36,7 +37,7 @@ class inventoryHistory(db.Model):
 	type = db.Column(db.String)
 	dimension_one = db.Column(db.String)
 	dimension_two = db.Column(db.String)
-	date_updated = db.Column(db.DateTime)
+	date_updated = db.Column(db.DateTime, onupdate=func.now())
 
 class inventoryTxt(db.Model):
     info = db.Column(db.String, primary_key=True)
