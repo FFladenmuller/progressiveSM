@@ -14,6 +14,9 @@ function validEModal(event)
 
 function validQuantity(event)
 {
+    // Checks that quantity has been entered, if entered make sure it is not more than you 
+    // currently have if the subtract drop down has been chosen.
+
     var button = $(event.relatedTarget);
     currentQuantity = parseInt(button.data('quantity'));
 
@@ -37,8 +40,9 @@ function validQuantity(event)
 
 function validPrice()
 {
-    if(!containsNumber($("#pr").val(), "#prD", "prInv", "Please enter a number.", "#pr"))
+    if(isNaN($("#pr").val()))
     {
+        appendErrorMessage("#prD", "prInv", "Please enter a number.", "#pr");
         return false;
     }
     else

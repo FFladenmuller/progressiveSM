@@ -10,7 +10,6 @@ function configQTypeahead()
 {
     $("#q").typeahead({ },
     {
-        // Dataset source = search()
         source: search,
 
         // This funky line below makes it so that the input box appears empty after selecting
@@ -19,7 +18,7 @@ function configQTypeahead()
         templates:
         {
             suggestion: Handlebars.compile(
-                "<div>{{shape}} {{type}}: {{dimensions}}</div>"
+                "<div>{{info}}</div>"
                 )
         }
     });

@@ -5,6 +5,10 @@ from sqlalchemy.dialects.postgresql import TSVECTOR
 import os
 from progressiveSM import db
 
+'''
+Classes allow sqlalchemy to map classes/objects to DB tables and allow you 
+to use sqlalchemy ORM.
+'''
 class User(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
 	username = db.Column(db.String, unique = True)
@@ -22,7 +26,17 @@ class Inventory(db.Model):
 	type = db.Column(db.String)
 	location = db.Column(db.String)
 	notes = db.Column(db.String)
-	date_updated = db.Column(db.DateTime, default=datetime.now)
+	date_updated = db.Column(db.DateTime, default=datetime.datetime.now())
+
+class inventoryHistory(db.Model):
+	id = db.Column(db.Integer, primary_key =True)
+	quantity = db.Column(db.String)
+	notes = db.Column(db.String)
+	shape = db.Column(db.String)
+	type = db.Column(db.String)
+	dimension_one = db.Column(db.String)
+	dimension_two = db.Column(db.String)
+	date_updated = db.Column(db.DateTime)
 
 class inventoryTxt(db.Model):
     info = db.Column(db.String, primary_key=True)

@@ -5,7 +5,7 @@ $(document).on('show.bs.modal','#editModal', function (event) {
   modalSetTitle(event, this);
   modalSetNotes(event);
 
-  $("#svBtn").on('click', function(){
+  $("#eSvBtn").on('click', function(){
       modalRemoveValidation();
       if(validEModal(event))
       {

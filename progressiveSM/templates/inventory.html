@@ -13,7 +13,7 @@
         <div class="col-sm-2" style = "border-right: 1px solid lightgrey">
             <legend>Filters</legend>
 
-            <!--- SHAPE RADIO BUTTON GROUP --->
+            <!--- SHAPE RADIO BUTTON GROUP -->
             <div class="form-group left-nav">
                 <label>Shape</label>
                 <div class="form-check">
@@ -23,21 +23,9 @@
                 </label>
               </div>
               <div class="form-check">
-                <label class="form-check-label">
-                  <input type="radio" class="form-check-input" name="shapeRadio" id="squareRadio" value="Square">
-                  Square
-                </label>
-              </div>
-              <div class="form-check">
               <label class="form-check-label">
                   <input type="radio" class="form-check-input" name="shapeRadio" id="roundRadio" value="Round">
                   Round
-                </label>
-              </div>
-              <div class="form-check">
-              <label class="form-check-label">
-                  <input type="radio" class="form-check-input" name="shapeRadio" id="ovalRadio" value="Oval">
-                  Oval
                 </label>
               </div>
           </div>
@@ -77,15 +65,15 @@
               </div>
         <div>
 
-        <!---- ROUND TYPE CHECKBOX GROUP ----->
+        <!---- ROUND TYPE CHECKBOX GROUP ---->
             </div>
             <div class = "form-group left-nav">
                 <label>Round Types</label>
                 {% for roundType in roundTypes %}
                     <div class="form-check">
                         <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" value={{roundType["type"]}} checked="">
-                        {{roundType["type"]}}
+                        <input class="form-check-input" type="checkbox" value={{roundType}} checked="">
+                        {{roundType}}
                         </label>
                     </div>
                 {% endfor %}
@@ -94,7 +82,7 @@
 
         <!---- RIGHT COLUMN ---->
 
-        <!--- SEARCH BAR ----->
+        <!--- SEARCH BAR -->
         <div class="col-10">
             <div class="form-group mt-3">
                 <div class ="row">
@@ -169,17 +157,76 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Add Item</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
-            ...
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+            <form action="/addItem" method="post" id ="addModalForm">
+            <div class="form-group">
+                    <label>Shape:</label>
+                    <select class="form-control" id="shapeSelect">
+                        <option>Round</option>
+                    </select>
+                </div>
+                <div class ="form-group">
+                    <label>Type:</label> 
+                    <select class="form-control" id="typeSelect">
+                        {% for roundType in roundTypes %}
+                            <option>{{roundType}}</option>
+                        {% endfor %}
+                        <option>New/Custom Type</option>
+                    </select>
+                </div>
+                <div class="row">
+                                <div class="col">
+                                    <div class="form-group" id ="addDimensionOneGroup">
+                                    <label>Dimension One:</label>
+                                    <input type="text" class="form-control" id="addDimensionOne" placeholder="Dimension One">
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group" id ="addDimensionTwoGroup">
+                                    <label>Dimension Two:</label>
+                                    <input type="text" class="form-control" id="addDimensionTwo" placeholder="Dimension Two">
+                                    </div>
+                                </div>
+                        </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group" id ="addQuantityGroup">
+                                <label>Quantity:</label>
+                                <input type="text" class="form-control" id="addQuantity" placeholder="Quantity">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group" id ="addPriceGroup">
+                                <label>Price:</label>
+                                <input type="text" class="form-control" id="addPrice" placeholder="Price">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group" id ="addNotesGroup">
+                                <label>Notes:</label>
+                                <input type="text" class="form-control" id="addNotes" placeholder="Notes">
+                        </div>
+                    </div>
+                    <div class="col">
+                    <div class="form-group" id ="addLocationGroup">
+                            <label>Location:</label>
+                            <input type="text" class="form-control" id="addLocation" placeholder="Location">
+                    </div>
+                    </div>
+                </div>
+                </form>
+           </div>
+           <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" id="aSvBtn" class="btn btn-primary">Save changes</button>
+           </div>
           </div>
         </div>
       </div>
@@ -239,7 +286,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" id="svBtn" class="btn btn-primary">Save changes</button>
+            <button type="button" id="eSvBtn" class="btn btn-primary">Save changes</button>
           </div>
         </div>
       </div>
