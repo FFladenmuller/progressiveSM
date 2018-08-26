@@ -6,7 +6,8 @@ $("#confirmation").keyup(function(){
 
 function confirmationNotPassword()
 {
-    removeValidationText("conInv", "conVal");
+    removeValidationText("conInv");
+    removeValidationText("conVal");
     if($("#confirmation").val() != $("#password").val())
     {
         appendErrorMessage($("#con"), "conInv", "Confirmation password must be the same as password.", "#confirmation");

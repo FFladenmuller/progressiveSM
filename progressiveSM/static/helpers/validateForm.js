@@ -2,19 +2,19 @@ function appendErrorMessage(divIdToAppend, invalidId, msg, tbIdToChange)
 {
     // Appends error text under textbox if it has not cleared validation
     // Also changes form outline to red for invalid
-    divMsg = "<div class=" + "\"invalid-feedback d-block\"  id=" + newElementId + ">" + msg + "</div>";
-    $(idToAppend).append(divMsg);
-    removeFormClass(formIdToChange, "is-valid");
-    changeFormStatus(formIdToChange, "is-invalid");
+    divMsg = "<div class=" + "\"invalid-feedback d-block\"  id=" + invalidId + ">" + msg + "</div>";
+    $(divIdToAppend).append(divMsg);
+    removeFormClass(tbIdToChange, "is-valid");
+    changeFormStatus(tbIdToChange, "is-invalid");
 }
 
 function appendValidFeedback(divIdToAppend, validId)
 {
     // Appends validation text under textbox if it has cleared validation
-    if($(newElementId).length == 0)
+    if($(validId).length == 0)
     {
-        divMsg = "<div class= \"valid-feedback d-block\" id=" + newElementId +"> Looks good! </div>"
-        $(idToAppend).append(divMsg);
+        divMsg = "<div class= \"valid-feedback d-block\" id=" + validId +"> Looks good! </div>"
+        $(divIdToAppend).append(divMsg);
     }
 }
 
@@ -42,19 +42,18 @@ function removeFormClass(formId, cssClass)
 function checkValidInput(tbIdToChange, invalidId, divIdToAppend, validId)
 {
     // Check if a textbox contains any error messages
-    if ($(invDiv).length == 0)
+    if ($(invalidId).length == 0)
     {
         removeFormClass(tbIdToChange, "is-invalid");
         changeFormStatus(tbIdToChange, "is-valid");
-        appendValidFeedback(idToAppend, valDiv);
+        appendValidFeedback(divIdToAppend, validId);
     }
 }
 
-function removeValidationText(invalidId, validId)
+function removeValidationText(idToRemove)
 {
     // Removes validation/error text under textboxes. 
-    $("div[id =" + invalidId + "]").remove();
-    $("div[id =" + validId + "]").remove();
+    $("div[id =" + idToRemove + "]").remove();
 }
 
 function containsNumber(str, idToAppend, newElementId, msg, formIdToChange)

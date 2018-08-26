@@ -17,7 +17,8 @@ $("#username").keyup(function(){
 function validateUsername(username)
 {
     // Clear invalid/valid divs under form
-    removeValidationText("usInv", "usVal");
+    removeValidationText("usInv");
+    removeValidationText("usVal")
 
     let parameters = {
         username: username

@@ -5,7 +5,8 @@ $("#email").keyup(function(){
 function checkEmail()
 {
     // Clear invalid/valid divs under form
-    removeValidationText("emInv", "emVal");
+    removeValidationText("emInv");
+    removeValidationText("emVal");
 
     // If user has entered something and it isnt a valid email, LET EM KNOW
     if(!checkEmailEmpty() && !checkValidEmail($("#email").val()))

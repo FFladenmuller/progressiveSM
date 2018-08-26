@@ -39,7 +39,7 @@
                               <div class="input-group-prepend">
                             <span class="input-group-text">$</span>
                           </div>
-                          <input type="text" class="form-control" id="minPrice" placeholder="min"></input>
+                          <input type="text" class="form-control" id="minPrice" placeholder="min">
                       </div>
                   </div>
                   <div class="col">
@@ -47,7 +47,7 @@
                           <div class="input-group-prepend">
                               <span class="input-group-text">$</span>
                           </div>
-                          <input type="text" class="form-control" id="maxPrice" placeholder="max"></input>
+                          <input type="text" class="form-control" id="maxPrice" placeholder="max">
                       </div>
                   </div>
                   </div>
@@ -61,7 +61,7 @@
           <label>Round Diameter</label>
               <div class="input-group mb-3">
                   </div>
-                  <input type="text" class="form-control" id="minPrice" placeholder="Diameter"></input>
+                  <input type="text" class="form-control" id="minPrice" placeholder="Diameter">
               </div>
         <div>
 
@@ -150,6 +150,8 @@
     <script src="/static/inventoryJs/filters.js"></script>
     <script src="/static/inventoryJs/eModalValidate.js"></script>
     <script src="/static/inventoryJs/eModal.js"></script>
+    <script src="/static/inventoryJs/aModal.js"></script>
+    <script src="/static/inventoryJs/aModalValidate.js"></script>
 </main>
 
             <!-- Add Modal -->
@@ -162,17 +164,17 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
+          <form action="/addItem" method="post" id ="addModalForm">
           <div class="modal-body">
-            <form action="/addItem" method="post" id ="addModalForm">
-            <div class="form-group">
+                <div class="form-group">
                     <label>Shape:</label>
-                    <select class="form-control" id="shapeSelect">
+                    <select class="form-control" id="shapeSelect" name="shapeSelect">
                         <option>Round</option>
                     </select>
                 </div>
                 <div class ="form-group">
                     <label>Type:</label> 
-                    <select class="form-control" id="typeSelect">
+                    <select class="form-control" id="typeSelect" name="typeSelect">
                         {% for roundType in roundTypes %}
                             <option>{{roundType}}</option>
                         {% endfor %}
@@ -180,30 +182,30 @@
                     </select>
                 </div>
                 <div class="row">
-                                <div class="col">
-                                    <div class="form-group" id ="addDimensionOneGroup">
-                                    <label>Dimension One:</label>
-                                    <input type="text" class="form-control" id="addDimensionOne" placeholder="Dimension One">
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="form-group" id ="addDimensionTwoGroup">
-                                    <label>Dimension Two:</label>
-                                    <input type="text" class="form-control" id="addDimensionTwo" placeholder="Dimension Two">
-                                    </div>
-                                </div>
+                    <div class="col">
+                        <div class="form-group" id ="addDimensionOneGroup">
+                            <label>Dimension One:</label>
+                            <input type="text" class="form-control" id="addDimensionOne" placeholder="Dimension One" name="addDimensionOne">
                         </div>
+                    </div> 
+                    <div class="col">
+                        <div class="form-group" id ="addDimensionTwoGroup">
+                            <label>Dimension Two:</label>
+                            <input type="text" class="form-control" id="addDimensionTwo" placeholder="Dimension Two" name="addDimensionTwo">
+                        </div>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col">
                         <div class="form-group" id ="addQuantityGroup">
                                 <label>Quantity:</label>
-                                <input type="text" class="form-control" id="addQuantity" placeholder="Quantity">
+                                <input type="text" class="form-control" id="addQuantity" placeholder="Quantity" name="addQuantity">
                         </div>
                     </div>
                     <div class="col">
                         <div class="form-group" id ="addPriceGroup">
                                 <label>Price:</label>
-                                <input type="text" class="form-control" id="addPrice" placeholder="Price">
+                                <input type="text" class="form-control" id="addPrice" placeholder="Price" name="addPrice">
                         </div>
                     </div>
                 </div>
@@ -211,22 +213,22 @@
                     <div class="col">
                         <div class="form-group" id ="addNotesGroup">
                                 <label>Notes:</label>
-                                <input type="text" class="form-control" id="addNotes" placeholder="Notes">
+                                <input type="text" class="form-control" id="addNotes" placeholder="Notes" name="addNotes">
                         </div>
                     </div>
                     <div class="col">
-                    <div class="form-group" id ="addLocationGroup">
-                            <label>Location:</label>
-                            <input type="text" class="form-control" id="addLocation" placeholder="Location">
-                    </div>
+                        <div class="form-group" id ="addLocationGroup">
+                                <label>Location:</label>
+                                <input type="text" class="form-control" id="addLocation" placeholder="Location" name="addLocation">
+                        </div>
                     </div>
                 </div>
-                </form>
            </div>
            <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" id="aSvBtn" class="btn btn-primary">Save changes</button>
+                <button type="submit" id="aSvBtn"  class="btn btn-primary">Save changes</button>
            </div>
+           </form>
           </div>
         </div>
       </div>

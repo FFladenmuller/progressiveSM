@@ -1,8 +1,7 @@
-from flask import Blueprint, render_template, request, session, jsonify
+from flask import Blueprint, render_template, request, session, jsonify, redirect
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import between
 from progressiveSM import db, Inventory, inventoryTxt, inventoryHistory
-from sqlalchemy.ext.serializer import dumps
 import datetime
 
 inventory = Blueprint('inventory', __name__)
@@ -63,7 +62,7 @@ def editInventory():
 def addItem():
     # Adds item to inventory and inventory history tables
 
-    shape = request.form.get("shapeSelect")
+    shape = request.values.get("shapeSelect")
     type = request.form.get("typeSelect")
     dimension_one = request.form.get("addDimensionOne")
     dimension_two = request.form.get("addDimensionTwo")

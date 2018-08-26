@@ -16,7 +16,8 @@ $("#password").keyup(function(){
 
 function passwordSecureEnough()
 {
-    removeValidationText("pwInv", "pwVal");
+    removeValidationText("pwInv");
+    removeValidationText("pwVal");
     let secure = true;
     let password = $("#password").val();
     let username = $("#username").val();

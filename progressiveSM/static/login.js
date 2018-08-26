@@ -1,8 +1,11 @@
 var allowSubmit = false;
 
 $("#loginForm").submit(function(event){
-    removeValidationText("usInv", "usVal");
-    removeValidationText("pwInv", "pwVal");
+    validationIds = ["usInv", "usVal", "pwInv", "pwVal"];
+    for (let i = 0; i < validationIds.length; i++)
+    {
+        removeValidationText(validationIds[i])
+    }
     if(!allowSubmit){
         event.preventDefault(); // prevent form submiting here
         validForm();
