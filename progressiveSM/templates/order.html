@@ -5,7 +5,179 @@ Order
 {% endblock %}
 
 {% block main %}
-<main class="container p-5">
-order some stuff woo
+<main class="container-fluid">
+    <div class = "row">
+
+        <!--- LEFT COLUMN ---->
+        <div class="col-sm-2" style = "border-right: 1px solid lightgrey">
+            <legend>Filters</legend>
+
+            <!---- Company checkbox ---->
+            <div class = "form-group left-nav">
+                <label>Company</label>
+                {% for company in companies %}
+                    <div class="form-check">
+                        <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" value={{company}} checked="">
+                        {{company["company"]}}
+                        </label>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <!--- PRICE TEXT BOX INPUT GROUP ---->
+        <div class="form-group left-nav">
+                <label>Price</label>
+                   <div class="row">
+                       <div class="col">
+                            <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                  <span class="input-group-text">$</span>
+                                </div>
+                                <input type="text" class="form-control" id="minPrice" placeholder="min">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">$</span>
+                                </div>
+                                <input type="text" class="form-control" id="maxPrice" placeholder="max">
+                            </div>
+                        </div>
+                        </div>
+                        <form class="text-center">
+                            <button class="btn btn-secondary" id= "priceBtn" type="button">Go</button>
+                        </form>
+              </div>
+
+            <!---- Status checkbox ---->
+                    <label>Status</label>
+                    <div class = "form-group left-nav">
+                            <div class="form-check">
+                                    <label class="form-check-label">
+                                    <input class="form-check-input" type="checkbox" value={{company}} checked="">
+                                    Stock
+                                    </label>
+                                </div>
+                        <div class="form-check">
+                            <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" value={{company}} checked="">
+                            Not started
+                            </label>
+                        </div>
+                        <div class="form-check">
+                                <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" value={{company}} checked="">
+                                In progress
+                                </label>
+                        </div>
+                        <div class="form-check">
+                                <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" value={{company}} checked="">
+                                Ready to ship
+                                </label>
+                        </div>
+                        <div class="form-check">
+                                <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" value={{company}} checked="">
+                                Shipped
+                                </label>
+                        </div>
+                </div>
+
+            <!-- Date Radio Buttons -->
+            <div class="form-group left-nav">
+                <label> Date</label>
+                <div class="form-check">
+                <label class="form-check-label">
+                  <input type="radio" class="form-check-input" name="dateRadio" id="allDate" value="all" checked="">
+                  All
+                </label>
+              </div>
+              <div class="form-check">
+              <label class="form-check-label">
+                  <input type="radio" class="form-check-input" name="dateRadio" id="oneYearDate" value="oneYear">
+                  Within 1 year
+                </label>
+              </div>
+              <div class="form-check">
+              <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="dateRadio" id="sixMonthDate" value="sixMonth">
+                Within 6 months
+              </label>
+              </div>
+              <div class="form-check">
+              <label class="form-check-label">
+                  <input type="radio" class="form-check-input" name="dateRadio" id="oneMonthDate" value="oneMonth">
+                  Within 1 month
+                </label>
+              </div>
+              <div class="form-check">
+                <label class="form-check-label">
+                    <input type="radio" class="form-check-input" name="dateRadio" id="oneWeekDate" value="oneWeek">
+                    Within 1 week
+                  </label>
+                </div>
+            </div>
+        </div>
+        <!--- SEARCH BAR -->
+        <div class="col-10">
+            <div class="form-group mt-3">
+                <div class ="row">
+                    <div class="col">
+                        <input autocomplete="off" autofocus class="form-control" id = 'q' name="search" placeholder="Search!" type="text"/>
+                    </div>
+                    <div class="col"></div>
+                        <form>
+                            <button class="btn btn-primary mr-5" id= "clear" type="submit">Clear Search</button>
+                        </form>
+                    {% block historyButton %}
+                    {% endblock %}
+                    </div>
+
+                </div>
+
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <form action ="/newOrder">
+                        <th><button type="submit" class="btn btn-info">
+                            <i class="material-icons">add</i></button></th>
+                    </form>
+                    <th scope="col">Company</th>
+                    <th scope="col">PO</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Date Updated</th>
+                    <th scope="col">Item List</th>
+                </tr>
+            </thead>
+            <tbody id = "tbody"> 
+                {% for order in orders %}
+                <tr id ={{order["id"]}}>
+                        <td> <button type = "button" class ="btn btn-secondary">
+                                <i class="material-icons">
+                                edit</i></button></td>
+                    <td> {{order["company"]}}</td> 
+                    <td> {{order["po"]}}</td>
+                    {% if order["price"] == None %}
+                            <td>$ 0</td>
+                    {% else %}
+                        <td> ${{order["price"]}}</td>
+                    {% endif %}
+                    <td> {{order["status"]}}</td>
+                    <td> {{order["date_updated"]|datetimeformat}}</td>
+                    <td> <button type = "button" class ="btn btn-secondary" name = "{{order["id"]}}">
+                        <i class="material-icons">
+                        info</i></button></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        </div>
+    </div>
+    </div>
 </main>
 {% endblock %}

@@ -1,9 +1,9 @@
 from flask import Flask, render_template, flash, redirect, request, session, jsonify
 from flask_session import Session
+from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 from werkzeug.security import check_password_hash, generate_password_hash
 import os
-import pdb
-from flask_sqlalchemy import SQLAlchemy
 import sys
 
 # Configure application
@@ -17,6 +17,9 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 # Configure database
 db = SQLAlchemy(app)
 
+# Set up flask-migrate with app, a library for changing database in versions
+migrate = Migrate(app, db)
+
 @app.after_request
 def after_request(response):
     response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
@@ -28,18 +31,15 @@ sys.path.insert(0, './progressiveSM/pies/')
 from progressiveSM.pies.models import *
 from progressiveSM.pies.helpers import *
 from progressiveSM.pies.inventory import inventory
+from progressiveSM.pies.inventoryHistory import inventory_history
 from progressiveSM.pies.notLogged import notLogged
-from progressiveSM.pies.order import orderStuff
+from progressiveSM.pies.ordering import ordering
+
+app.jinja_env.filters['datetimeformat'] = datetimeformat
 
 app.register_blueprint(inventory)
-app.register_blueprint(orderStuff)
+app.register_blueprint(inventory_history)
+app.register_blueprint(ordering)
 app.register_blueprint(notLogged) 
 app.register_blueprint(helpers)  
-
-@app.route("/logout")
-def logout():
-    """Log user out"""
-    # Forget any user_id
-    session.clear()
-    return redirect("/")
 

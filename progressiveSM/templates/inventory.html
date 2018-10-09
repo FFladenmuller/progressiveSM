@@ -1,322 +1,69 @@
-{% extends "layout.html" %}
+{% extends "filtersearchtable.html" %}
 
-{% block title %}
-    Inventory
-{% endblock %}
-
-{% block main %}
-
-<main class="container-fluid">
-    <div class = "row">
-
-        <!--- LEFT COLUMN ---->
-        <div class="col-sm-2" style = "border-right: 1px solid lightgrey">
-            <legend>Filters</legend>
-
-            <!--- SHAPE RADIO BUTTON GROUP -->
-            <div class="form-group left-nav">
-                <label>Shape</label>
-                <div class="form-check">
-                <label class="form-check-label">
-                  <input type="radio" class="form-check-input" name="shapeRadio" id="allRad" value="all" checked ="">
-                  All
-                </label>
-              </div>
-              <div class="form-check">
-              <label class="form-check-label">
-                  <input type="radio" class="form-check-input" name="shapeRadio" id="roundRadio" value="Round">
-                  Round
-                </label>
-              </div>
-          </div>
-
+{% block customFilters %}
         <!--- PRICE TEXT BOX INPUT GROUP ---->
         <div class="form-group left-nav">
-          <label>Price</label>
-             <div class="row">
-                 <div class="col">
-                      <div class="input-group mb-3">
-                              <div class="input-group-prepend">
-                            <span class="input-group-text">$</span>
-                          </div>
-                          <input type="text" class="form-control" id="minPrice" placeholder="min">
-                      </div>
-                  </div>
-                  <div class="col">
-                      <div class="input-group mb-3">
-                          <div class="input-group-prepend">
+            <label>Price</label>
+               <div class="row">
+                   <div class="col">
+                        <div class="input-group mb-3">
+                                <div class="input-group-prepend">
                               <span class="input-group-text">$</span>
-                          </div>
-                          <input type="text" class="form-control" id="maxPrice" placeholder="max">
-                      </div>
-                  </div>
-                  </div>
-                  <form class="text-center">
-                      <button class="btn btn-secondary" id= "priceBtn" type="button">Go</button>
-                  </form>
-        </div>
-
-        <!---- ROUND DIAMETER INPUT BOX GROUP ---->
-        <div class="form-group left-nav">
-          <label>Round Diameter</label>
-              <div class="input-group mb-3">
-                  </div>
-                  <input type="text" class="form-control" id="minPrice" placeholder="Diameter">
-              </div>
-        <div>
-
-        <!---- ROUND TYPE CHECKBOX GROUP ---->
-            </div>
-            <div class = "form-group left-nav">
-                <label>Round Types</label>
-                {% for roundType in roundTypes %}
-                    <div class="form-check">
-                        <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" value={{roundType}} checked="">
-                        {{roundType}}
-                        </label>
-                    </div>
-                {% endfor %}
-                </div>
-        </div>
-
-        <!---- RIGHT COLUMN ---->
-
-        <!--- SEARCH BAR -->
-        <div class="col-10">
-            <div class="form-group mt-3">
-                <div class ="row">
-                    <div class="col">
-                        <input autocomplete="off" autofocus class="form-control" id = 'q' name="search" placeholder="Search!" type="text"/>
-                    </div>
-                    <div class="col"></div>
-                        <form>
-                            <button class="btn btn-primary" id= "clear" type="submit">Clear Search</button>
-                        </form>
-                    </div>
-
-                </div>
-
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th><button type="button" class="btn btn-info" data-toggle="modal" data-target="#addModal"><i class="material-icons">add</i></button></th>
-                        <th scope="col">Shape</th>
-                        <th scope="col">Type</th>
-                        <th scope="col">Quantity</th>
-                        <th scope="col">Dimensions</th>
-                        <th scope="col">Price</th>
-                        <th scope="col">Notes</th>
-                        <th scope="col">Location</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody id = "tbody">
-                    {% for item in inventory %}
-                    <tr id ={{item["id"]}}>
-                        <td><button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#editModal"
-                        data-shape="{{item["shape"]}}"
-                        data-type="{{item["type"]}}"
-                        data-dimension_one="{{item["dimension_one"]}}"
-                        data-dimension_two="{{item["dimension_two"]}}"
-                        data-quantity="{{item["quantity"]}}"
-                        data-id="{{item["id"]}}"
-                        data-notes="{{item["notes"]}}"
-                        data-location="{{item["location"]}}"
-                        ><i class="material-icons">edit</i></button></td>
-                        <td> {{item["shape"]}}</td>
-                        <td> {{item["type"]}}</td>
-                        <td> {{item["quantity"]}}</td>
-                        {% if item["shape"] == "Square" %}
-                            <td> {{item["dimension_one"]}} X {{item["dimension_two"]}}</td>
-                        {% elif item["type"] == "Reducer" %}
-                            <td> {{item["dimension_one"]}} : {{item["dimension_two"]}}</td>
-                        {% else %}
-                            <td> {{item["dimension_one"]}}</td>
-                        {% endif %}
-                        <td> {{item["price"]}}</td>
-                        <td> {{item["notes"]}}</td>
-                        <td> {{item["location"]}}</td>
-                        <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="deleteModal"><i class="material-icons">delete</i></button></td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
-        <!-- http://handlebarsjs.com/ -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
-    <script src="/static/helpers/validateForm.js"></script>
-    <script src="/static/inventoryJs/search.js"></script>
-    <script src="/static/inventoryJs/filters.js"></script>
-    <script src="/static/inventoryJs/eModalValidate.js"></script>
-    <script src="/static/inventoryJs/eModal.js"></script>
-    <script src="/static/inventoryJs/aModal.js"></script>
-    <script src="/static/inventoryJs/aModalValidate.js"></script>
-</main>
-
-            <!-- Add Modal -->
-    <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModal" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Add Item</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <form action="/addItem" method="post" id ="addModalForm">
-          <div class="modal-body">
-                <div class="form-group">
-                    <label>Shape:</label>
-                    <select class="form-control" id="shapeSelect" name="shapeSelect">
-                        <option>Round</option>
-                    </select>
-                </div>
-                <div class ="form-group">
-                    <label>Type:</label> 
-                    <select class="form-control" id="typeSelect" name="typeSelect">
-                        {% for roundType in roundTypes %}
-                            <option>{{roundType}}</option>
-                        {% endfor %}
-                        <option>New/Custom Type</option>
-                    </select>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <div class="form-group" id ="addDimensionOneGroup">
-                            <label>Dimension One:</label>
-                            <input type="text" class="form-control" id="addDimensionOne" placeholder="Dimension One" name="addDimensionOne">
-                        </div>
-                    </div> 
-                    <div class="col">
-                        <div class="form-group" id ="addDimensionTwoGroup">
-                            <label>Dimension Two:</label>
-                            <input type="text" class="form-control" id="addDimensionTwo" placeholder="Dimension Two" name="addDimensionTwo">
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <div class="form-group" id ="addQuantityGroup">
-                                <label>Quantity:</label>
-                                <input type="text" class="form-control" id="addQuantity" placeholder="Quantity" name="addQuantity">
+                            </div>
+                            <input type="text" class="form-control" id="minPrice" placeholder="min">
                         </div>
                     </div>
                     <div class="col">
-                        <div class="form-group" id ="addPriceGroup">
-                                <label>Price:</label>
-                                <input type="text" class="form-control" id="addPrice" placeholder="Price" name="addPrice">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">$</span>
+                            </div>
+                            <input type="text" class="form-control" id="maxPrice" placeholder="max">
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <div class="form-group" id ="addNotesGroup">
-                                <label>Notes:</label>
-                                <input type="text" class="form-control" id="addNotes" placeholder="Notes" name="addNotes">
-                        </div>
                     </div>
-                    <div class="col">
-                        <div class="form-group" id ="addLocationGroup">
-                                <label>Location:</label>
-                                <input type="text" class="form-control" id="addLocation" placeholder="Location" name="addLocation">
-                        </div>
-                    </div>
-                </div>
-           </div>
-           <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" id="aSvBtn"  class="btn btn-primary">Save changes</button>
-           </div>
-           </form>
+                    <form class="text-center">
+                        <button class="btn btn-secondary" id= "priceBtn" type="button">Go</button>
+                    </form>
           </div>
-        </div>
-      </div>
-    </div>
+{% endblock %}
 
-    </div>
+{% block historyButton %}
+<form action = "/inventoryHistory">
+    <button class="btn btn-primary mr-5" id= "clear" type="submit">History</button>
+</form>
+{% endblock %}
 
+{% block table %}
+{% include "inventoryTable.html" %}
+{% endblock %}
 
-                <!-- Edit Modal -->
-    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModal" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="editModalLabel"></h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-             <div class="form-group">
-                  <label>Quantity:</label>
-                  <div class="row">
-                      <div class="col">
-                          <select class="form-control" id="qtSelect">
-                            <option>Set to</option>
-                            <option>Add</option>
-                            <option>Subtract</option>
-                          </select>
-                      </div>
-                      <div class="col" id= "qtD">
-                          <input type="text" class="form-control" id="qt" placeholder="Quantity">
-                      </div>
-                  </div>
-              </div>
-            <div class="form-group" id="prD">
-              <label>Price:</label>
-              <input type="text" class="form-control" id="pr" placeholder="Enter new price here...">
-            </div>
-            <div class="form-group">
-                  <label>Notes:</label>
-                  <div class="row">
-                      <div class="col">
-                          <select class="form-control" id="ntSelect">
-                            <option>Set notes to:</option>
-                            <option>Add to notes:</option>
-                          </select>
-                      </div>
-                      <div class="col">
-                          <input type="text" class="form-control" id="ntInput" placeholder="Enter notes here...">
-                      </div>
-                  </div>
-              </div>
-              <div class="form-group">
-              <label>Location:</label>
-              <input type="text" class="form-control" id="loc" placeholder="Enter new location here...">
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" id="eSvBtn" class="btn btn-primary">Save changes</button>
-          </div>
-        </div>
-      </div>
-    </div>
+{% block javascript %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+<script src="/static/helpers/validateForm.js"></script>
+<script src="/static/modalJs/search.js"></script>
+<script src="/static/modalJs/filters.js"></script>
+<script src="/static/modalJs/eModalValidate.js"></script>
+<script src="/static/modalJs/eModal.js"></script>
+<script src="/static/modalJs/aModal.js"></script>
+<script src="/static/modalJs/dModal.js"></script>
+<script src="/static/modalJs/aModalValidate.js"></script>
+<script src="/static/inventoryJs/aModalSubmit.js"></script>
+<script src="/static/inventoryJs/eModalSubmit.js"></script>
+{% endblock %}
 
-    </div>
+{% block modals %}
+<form action="/addItem" method="post" id ="addModalForm"> 
+    {% include "addModal/addModalSubmit.html" %}
+</form>
 
-                    <!-- Delete Modal -->
-    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            ...
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-          </div>
-        </div>
-      </div>
-    </div>
+<form action="/deleteItem" method="post" id="deleteModalForm">
+    {% include "deleteModal/deleteModalSubmit.html" %}
+</form>
 
-    </div>
+<form action="/editItem" method="post" id ="editModalForm">
+    {% include "editModal/editModalSubmit.html" %}
+</form>
 
 {% endblock %}
+  </div>

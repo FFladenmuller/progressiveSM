@@ -5,7 +5,143 @@ Index
 {% endblock %}
 
 {% block main %}
-<main class="container p-5">
-    hi
-</main>
+
+<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+  </ol>
+  <div class="carousel-inner" role="listbox">
+    <!-- Slide One - Set the background image for this slide in the line below -->
+    <div class="carousel-item active" style="background-image: url('static/pics/road.jpg')">
+      <div class="carousel-caption d-none d-md-block">
+        <h3>Road</h3>
+        <p>What a road!</p>
+      </div>
+    </div>
+    <!-- Slide Two - Set the background image for this slide in the line below -->
+    <div class="carousel-item" style="background-image: url('static/pics/bridge.jpg')">
+      <div class="carousel-caption d-none d-md-block">
+        <h3>Bridge</h3>
+        <p>Wow, incredible bridge!</p>
+      </div>
+    </div>
+    <!-- Slide Three - Set the background image for this slide in the line below -->
+    <div class="carousel-item" style="background-image: url('static/pics/mountain.jpg')">
+      <div class="carousel-caption d-none d-md-block">
+        <h3>Mountain</h3>
+        <p>This mountain depresses me.</p>
+      </div>
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+
+
+  <section class="py-5">
+  <div class="container">
+    <h1 class="text-center">About us</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+    Phasellus et sapien id diam dapibus varius. In semper tempor ultricies. Ut ut felis et nunc pulvinar pretium.
+    Maecenas et gravida urna. Pellentesque et urna lacus. Praesent purus diam, tristique in convallis at, consectetur at nunc. 
+    Morbi tempus nisi a neque ultrices, quis tempus magna molestie. Interdum et malesuada fames ac ante ipsum primis in faucibus. 
+    In non arcu sed risus varius dictum. Mauris quam sapien, posuere vitae dui vitae, rhoncus ullamcorper orci. 
+    Suspendisse vitae sem ac sapien faucibus ornare a sagittis nisl. Praesent faucibus felis vitae pellentesque porta.
+      Sed pellentesque purus non faucibus tristique. Suspendisse volutpat augue eget quam placerat, quis finibus metus porta.
+      Proin elit sapien, aliquet eu dolor ac, scelerisque aliquet dolor.
+      </p>
+
+    <p>Etiam tincidunt turpis sed ultrices fringilla. Maecenas pellentesque viverra velit eget vehicula. 
+      Pellentesque at metus a ipsum aliquet ornare non a velit. Ut at tempus lectus, vel tempus dolor. 
+      Suspendisse tincidunt massa nulla, blandit interdum nibh semper vitae. Maecenas in mauris libero. 
+      Mauris convallis pulvinar sapien nec vestibulum. Donec et lorem vitae libero feugiat elementum at dapibus odio. 
+      Sed elementum nibh quis pellentesque scelerisque. Mauris vehicula mauris urna, vel dapibus nulla malesuada sit amet. 
+      Vivamus vitae ipsum non ligula semper mollis.</p>
+    </div>
+  </section>
+
+  <header>
+  <div class="overlay"></div>
+  <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
+    <source src="static/pics/BG_02.mp4" type="video/mp4">
+  </video>
+  <div class="container h-100">
+    <div class="d-flex text-center h-100">
+      <div class="my-auto w-100 text-white">
+        <h1 class="display-3">Sheet Metal</h1>
+        <h2>Built with Excellence</h2>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="py-5">
+    <div class="container">
+      <h1 class="text-center">The Team</h1>
+      <div class="row mt-5">
+        <div class = "col">
+          <img src="static/pics/photo-richard.png" class="img-responsive rounded-circle mx-auto d-block" alt="richie" width="200" height="200">
+          <p class="text-center">Keith Beaulieu
+            <br>
+            <i>Founder/Owner</i>
+          </p>
+        </div>
+        <div class = "col">
+            <img src="static/pics/photo-jared.png" class="img-responsive rounded-circle mx-auto d-block" alt="jared" width="200" height="200">
+          <p class="text-center">John Hamilton
+            <br>
+            <i>Project Designer</i>
+          </p>
+          </div>
+        <div class = "col">
+            <img src="static/pics/photo-monica.png" class="img-responsive rounded-circle mx-auto d-block" alt="monica" width="200" height="200">
+          <p class="text-center">Andrea Beaulieu
+            <br>
+            <i>Financial Manager</i>
+          </p>
+      </div>
+      </div>
+
+      <div class="row">
+          <div class = "col">
+            <img src="static/pics/photo-big-head.png" class="img-responsive rounded-circle mx-auto d-block" alt="richie" width="200" height="200">
+            <p class="text-center">Adam Perillo
+              <br>
+              <i>Square Department Foreman</i>
+            </p>
+          </div>
+          <div class = "col">
+              <img src="static/pics/photo-gilfoyle.png" class="img-responsive rounded-circle mx-auto d-block" alt="jared" width="200" height="200">
+            <p class="text-center">Khamil Stachowicz
+              <br>
+              <i>Spiral Department Foreman</i>
+            </p>
+            </div>
+          <div class = "col">
+              <img src="static/pics/photo-dinesh.png" class="img-responsive rounded-circle mx-auto d-block" alt="monica" width="200" height="200">
+            <p class="text-center">Joseph Carnelli
+              <br>
+              <i>Shipping & Recieving</i>
+            </p>
+        </div>
+        </div>
+      </div>
+    </section>
+
 {% endblock %}
+
+<script language="JavaScript" type="text/javascript">
+    $(document).ready(function(){
+      $('.carousel').carousel({
+        interval: 3000
+      })
+    });    
+  </script> 

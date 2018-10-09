@@ -35,7 +35,7 @@ function checkboxPressedFilter(checkbox)
         return $(this).text().indexOf($(checkbox).val()) != -1;
         }).parent().show();
     }
-    else if(! $(checkbox).is(':checked'))
+    else 
     {
         $("td").filter(function() {
         return $(this).text().indexOf($(checkbox).val()) != -1;
@@ -46,11 +46,11 @@ function checkboxPressedFilter(checkbox)
 // Price Filter ============================================================
 
 $("#priceBtn").on('click', function(){
-    if($.trim($("#minPrice").val()) == "")
+    if($.trim($("#minPrice").val()) == "" || isNaN(parseInt($("#minPrice").val())))
     {
-        return;
+        $("#minPrice").val("0");
     }
-    max = ($.trim($("#maxPrice").val()) == "") ? 100000 : parseInt($("#maxPrice").val());
+    max = ($.trim($("#maxPrice").val()) == "" || isNaN(parseInt($("#maxPrice").val()))) ? 100000 : parseInt($("#maxPrice").val());
     let parameters =
     {
          minPrice: parseInt($("#minPrice").val()),
@@ -59,9 +59,31 @@ $("#priceBtn").on('click', function(){
 
     $.getJSON("/priceFilter", parameters, function(data){
          $("#tbody").children().hide();
-         for(let i = 0; i < data.length; i++)
+         for(let i = 0; i < data["id"].length; i++)
          {
-             $("#" + data[i].id).show();
+             $("#" + data["id"][i]).show();
+         }
+    })
+})
+
+// Round Diameter Filter ============================
+$("#diameterBtn").on('click', function(){
+    if($.trim($("#diameter").val()) == "" || isNaN(parseInt($("#diameter").val())))
+    {
+        return;
+    }
+
+    let parameters = 
+    {
+        maxDiameter : parseInt($("#diameter").val())
+    };
+
+    $.getJSON("/diameterFilter", parameters, function(data)
+    {
+        $("#tbody").children().hide();
+         for(let i = 0; i < data["id"].length; i++)
+         {
+             $("#" + data["id"][i]).show();
          }
     })
 })

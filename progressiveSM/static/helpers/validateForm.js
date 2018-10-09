@@ -18,13 +18,12 @@ function appendValidFeedback(divIdToAppend, validId)
     }
 }
 
-function checkFieldEmpty(formId, idToAppend, newElementId, msg)
+function checkFieldEmpty(formId, divIdToAppend, newElementId, msg)
 {
     // Makes sure a textbox is not empty, or just spaces
-    let id = $(formId).val();
-    if ($.trim(id) == "")
+    if ($.trim($(formId).val()) == "")
     {
-        appendErrorMessage(idToAppend, newElementId, msg, formId);
+        appendErrorMessage(divIdToAppend, newElementId, msg, formId);
         return true;
     }
 }
@@ -70,18 +69,10 @@ function containsNumber(str, idToAppend, newElementId, msg, formIdToChange)
     return false;
 }
 
-function containsPostiveNumber(str) 
-{
-    if (parseInt(str) >= 1)
-    {
-        return true;
-    }
-}
-
 function positiveQuantityTextbox(tbId, invalidId, validId, divIdToAppend)
 {
     // Makes sure quantity entered is a positive number (>= 1)
-    if (containsPostiveNumber ($(tbId).val()))
+    if (parseInt($(tbId).val()) >= 1)
     {
         checkValidInput(tbId, invalidId, divIdToAppend, validId);
         return true;
@@ -90,4 +81,37 @@ function positiveQuantityTextbox(tbId, invalidId, validId, divIdToAppend)
     {
         appendErrorMessage(divIdToAppend, invalidId, "Please enter a postive number.", tbId);
     }
+}
+
+function modalSetTitle(event, thisModal)
+{
+  var button = $(event.relatedTarget);
+
+  // Get data about item
+  var shape = button.data('shape');
+  var type = button.data('type');
+  var dimensionOne = button.data('dimension_one');
+  var dimensionTwo = button.data('dimension_two');
+  var connector = button.data('connector');
+  var id = button.data('id');
+
+  // Get modal
+  var modal = $(thisModal);
+
+  var dimensionStr = "";
+  if (shape == "Square")
+  {
+      dimensionStr = dimensionOne + " X " + dimensionTwo;
+  }
+  else if (type == "Reducer")
+  {
+      dimensionStr = dimensionOne + " : " + dimensionTwo;
+  }
+  else
+  {
+      dimensionStr = dimensionOne;
+  }
+
+
+  modal.find('.modal-title').text("#" + id + ": " + shape + " " + type + ": " + dimensionStr + " " + connector);
 }

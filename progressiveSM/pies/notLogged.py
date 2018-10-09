@@ -47,3 +47,10 @@ def login():
         return redirect('/')
     else:
         return render_template('login.html')
+
+@notLogged.route("/logout")
+def logout():
+    """Log user out"""
+    # Forget any user_id
+    session.clear()
+    return redirect("/")

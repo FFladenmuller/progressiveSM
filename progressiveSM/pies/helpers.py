@@ -44,3 +44,6 @@ def passwordCheck():
         return jsonify(result = False)
     else:
         return jsonify(result = True)
+
+def datetimeformat(value):
+    return value.strftime("%m-%d-%Y") 
