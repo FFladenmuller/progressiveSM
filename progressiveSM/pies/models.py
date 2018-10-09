@@ -1,6 +1,5 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from flask_marshmallow import Marshmallow
 from datetime import datetime
 from sqlalchemy.dialects.postgresql import TSVECTOR
 from sqlalchemy.sql import func
