@@ -1,0 +1,92 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Inventory
+{% endblock %}
+
+{% block main %}
+
+<main class="container-fluid">
+    <div class = "row">
+
+        <!--- LEFT COLUMN ---->
+        <div class="col-sm-2" style = "border-right: 1px solid lightgrey">
+            <legend>Filters</legend>
+
+            <!--- SHAPE RADIO BUTTON GROUP -->
+            <div class="form-group left-nav">
+                <label>Shape</label>
+                <div class="form-check">
+                <label class="form-check-label">
+                  <input type="radio" class="form-check-input" name="shapeRadio" id="allRad" value="all" checked ="">
+                  All
+                </label>
+              </div>
+              <div class="form-check">
+              <label class="form-check-label">
+                  <input type="radio" class="form-check-input" name="shapeRadio" id="roundRadio" value="Round">
+                  Round
+                </label>
+              </div>
+          </div>
+
+        {% block customFilters %}
+        {% endblock %}
+
+        <!---- ROUND DIAMETER INPUT BOX GROUP ---->
+        <div class="form-group left-nav">
+          <label>Round Diameter</label>
+                <div class ="row">
+                    <div class = "col">
+                    <input type="text" class="form-control" id="diameter" placeholder="Diameter">
+                    </div>
+                    <div class="col">
+                    <button class="btn btn-secondary" id= "diameterBtn" type="button">Go</button>
+                    </div>
+                </div>
+        </div>
+
+        <!---- ROUND TYPE CHECKBOX GROUP ---->
+            <div class = "form-group left-nav">
+                <label>Round Types</label>
+                {% for roundType in roundTypes %}
+                    <div class="form-check">
+                        <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" value={{roundType}} checked="">
+                        {{roundType}}
+                        </label>
+                    </div>
+                {% endfor %}
+                </div>
+        </div>
+
+        <!---- RIGHT COLUMN ---->
+
+        <!--- SEARCH BAR -->
+        <div class="col-10">
+            <div class="form-group mt-3">
+                <div class ="row">
+                    <div class="col">
+                        <input autocomplete="off" autofocus class="form-control" id = 'q' name="search" placeholder="Search!" type="text"/>
+                    </div>
+                    <div class="col"></div>
+                        <form>
+                            <button class="btn btn-primary mr-5" id= "clear" type="submit">Clear Search</button>
+                        </form>
+                    {% block historyButton %}
+                    {% endblock %}
+                    </div>
+
+                </div>
+                {% block table%}
+                {% endblock %}
+        </div>
+</main>
+
+{% block javascript %}
+{% endblock %}
+
+{% block modals %}
+{% endblock %}
+
+{% endblock %}

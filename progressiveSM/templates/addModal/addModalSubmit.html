@@ -1,0 +1,17 @@
+{% extends "addModal/addModal.html" %}
+
+{% block extraFields %}
+<div class="col">
+    <div class="form-group" id ="addLocationGroup">
+            <label>Location:</label>
+            <input type="text" class="form-control" id="addLocation" placeholder="Location" name="addLocation">
+    </div>
+</div>
+{% endblock %}
+
+{% block footer %}
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    <button type="submit" id="aSvBtn"  class="btn btn-primary">Save changes</button>
+</div>
+{% endblock %}

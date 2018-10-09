@@ -1,0 +1,81 @@
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Add Item</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                  <div class="form-group">
+                      <label>Shape:</label>
+                      <select class="form-control" id="shapeSelect" name="shapeSelect">
+                          <option>Round</option>
+                      </select>
+                  </div>
+                  <div class ="form-group" id="typeSelectGroup">
+                      <label>Type:</label> 
+                      <select class="form-control" id="typeSelect" name="typeSelect">
+                          {% for roundType in roundTypes %}
+                              <option>{{roundType}}</option>
+                          {% endfor %}
+                          <option>New/Custom Type</option>
+                      </select>
+                  </div>
+                  <div class="form-group" id="connectorSelectGroup">
+                      <label>Connector:</label>
+                      <select class="form-control" id="connectorSelect" name="connectorSelect">
+                          <option>Select one:</option>
+                          <option>Bead</option>
+                          <option>Gasket</option>
+                          <option>Bead & Crimp</option>
+                      </select>
+                  </div>
+                  <div class="row">
+                      <div class="col">
+                          <div class="form-group" id ="addDimensionOneGroup">
+                              <label>Dimension One:</label>
+                              <input type="text" class="form-control" id="addDimensionOne" placeholder="Dimension One" name="addDimensionOne">
+                          </div>
+                      </div> 
+                      <div class="col">
+                          <div class="form-group" id ="addDimensionTwoGroup">
+                              <label>Dimension Two:</label>
+                              <input type="text" class="form-control" id="addDimensionTwo" placeholder="Dimension Two" name="addDimensionTwo">
+                          </div>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col">
+                          <div class="form-group" id ="addQuantityGroup">
+                                  <label>Quantity:</label>
+                                  <input type="text" class="form-control" id="addQuantity" placeholder="Quantity" name="addQuantity">
+                          </div>
+                      </div>
+                      <div class="col">
+                          <div class="form-group" id ="addPriceGroup">
+                                  <label>Price:</label>
+                                  <input type="text" class="form-control" id="addPrice" placeholder="Price" name="addPrice">
+                          </div>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col">
+                          <div class="form-group" id ="addNotesGroup">
+                                  <label>Notes:</label>
+                                  <input type="text" class="form-control" id="addNotes" placeholder="Notes" name="addNotes">
+                          </div>
+                      </div>
+                      {% block extraFields %}
+                      {% endblock %}
+                  </div>
+             </div>
+             {% block footer %}
+             {% endblock %}
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      </div>

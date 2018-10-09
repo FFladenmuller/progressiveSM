@@ -1,0 +1,60 @@
+  <!-- Edit Modal -->
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModal" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" name="eModalTitle" id="eModalTitle"></h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+        
+                        <div class="modal-body">
+                            <div class="form-group">
+                                    <input type="hidden" id="modalId" name="id">
+                            </div>
+                            <div class="form-group">
+                                <label>Quantity:</label>
+                                <div class="row">
+                                    <div class="col">
+                                        <select class="form-control" id="qtSelect" name="quantitySelect">
+                                            <option>Add</option>
+                                            <option>Subtract</option>
+                                        </select>
+                                    </div>
+                                    <div class="col" id= "qtD">
+                                        <input type="text" class="form-control" id="qt" name="quantityTB" placeholder="Quantity">
+                                    </div>
+                                </div>
+                            </div>
+        
+                            <div class="form-group" id="prD">
+                                <label>Price:</label>
+                                <input type="text" class="form-control" id="pr" name="priceTB" placeholder="Enter new price here...">
+                            </div>
+        
+                            <div class="form-group">
+                                <label>Notes:</label>
+                                <div class="row">
+                                    <div class="col">
+                                        <select class="form-control" id="ntSelect" name="notesSelect">
+                                        <option>Set notes to:</option>
+                                        <option>Add to notes:</option>
+                                        </select>
+                                    </div>
+                                    <div class="col">
+                                        <input type="text" class="form-control" id="ntInput" name="notesTB"placeholder="Enter notes here...">
+                                    </div>
+                                </div>
+                            </div>
+        
+                            {% block extraFields %}
+                            {% endblock %}
+                        </div>
+        
+                        {% block footer %}
+                        {% endblock %}
+                    </div>
+        
+            </div>
+        </div>

@@ -1,0 +1,43 @@
+{% extends "filtersearchtable.html" %}
+
+{% block table %}
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">Shape</th>
+            <th scope="col">Type</th>
+            <th scope="col">Dimensions</th>
+            <th scope="col">Connector</th>
+            <th scope="col">Operation</th>
+            <th scope="col">Quantity Changed</th>
+            <th scope="col">Date</th>
+        </tr>
+    </thead>
+    <tbody id = "tbody"> 
+        {% for item in inventoryHistory %}
+        <tr id ={{item["inventory"].id}}>
+            <td> {{item["inventory"].shape}}</td> 
+            <td> {{item["inventory"].type}}</td>
+            {% if item["inventory"].type == "Reducer" %}
+                <td> {{item["inventory"].dimension_one}}": {{item["inventory"].dimension_two}}"</td>
+            {% else %}
+                <td> {{item["inventory"].dimension_two}}"</td>
+            {% endif %}
+            <td> {{item["inventory"].connector}}</td>
+            <td> {{item["operation"]}}</td>
+            <td> {{item["quantity"]}}</td>
+            <td> {{item["date_updated"]|datetimeformat}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
+
+{% block javascript %}
+<script src="/static/helpers/validateForm.js"></script>
+<script src="/static/inventoryJs/search.js"></script>
+<script src="/static/inventoryJs/filters.js"></script>
+{% endblock %}
+
+{% block modals %}
+{% endblock %}

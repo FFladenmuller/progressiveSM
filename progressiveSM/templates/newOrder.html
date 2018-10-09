@@ -1,0 +1,105 @@
+{% extends "layout.html" %}
+
+{% block main %}
+<main class="container-fluid">
+    <form action="/addOrder" method="post">
+    
+        <!-- Company Textbox-->
+        <div class="row mt-5">
+            <div class ="col">
+                <div class="form-group">
+                    <input autocomplete="off" autofocus class="form-control" id = "company" 
+                    name="company" placeholder="Company" type="text"/>
+                    <p></p>
+                </div>
+            </div>
+
+        <!-- PO Textbox-->
+            <div class ="col">
+                <div class="form-group">
+                    <input autocomplete="off" autofocus class="form-control" id = "po" 
+                    name="po" placeholder="PO" type="text"/>
+                    <p></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Table-->
+        <div class="table-responsive">
+                <table class="table table-hover">
+                        <thead>
+                                <tr>
+                                    <th><button type="button" class="btn btn-info" data-toggle="modal" data-target="#addModal"><i class="material-icons">add</i></button></th>
+                                    <th scope="col">Shape</th>
+                                    <th scope="col">Type</th>
+                                    <th scope="col">Dimensions</th>
+                                    <th scope="col">Connector</th>
+                                    <th scope="col">Quantity</th>
+                                    <th scope="col">Price</th>
+                                    <th scope="col">Notes</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id = "tbody"> 
+                                    {% for item in inventory %}
+                                    <tr id ={{item["id"]}}>
+                                        <td><button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#editModal"
+                                        data-shape="{{item["shape"]}}"
+                                        data-type="{{item["type"]}}"
+                                        data-connector="{{item["connector"]}}"
+                                        data-dimension_one="{{item["dimension_one"]}}"
+                                        data-dimension_two="{{item["dimension_two"]}}"
+                                        data-quantity="{{item["quantity"]}}"
+                                        data-availabe_quantity="{{item["available_quantity"]}}"
+                                        data-price="{{item["price"]}}"
+                                        data-id="{{item["id"]}}"
+                                        data-notes="{{item["notes"]}}"
+                                        data-location="{{item["location"]}}"
+                                        ><i class="material-icons">edit</i></button></td>
+                                        <td> {{item["shape"]}}</td> 
+                                        <td> {{item["type"]}}</td>
+                                        {% if item["type"] == "Reducer" %}
+                                            <td> {{item["dimension_one"]}}": {{item["dimension_two"]}}"</td>
+                                        {% else %}
+                                            <td> {{item["dimension_one"]}}"</td>
+                                        {% endif %}
+                                        <td> {{item["connector"]}}</td>
+                                        <td> {{item["quantity"]}}</td>
+                                        <td> ${{item["price"]}}</td>
+                                        <td> {{item["notes"]}}</td>
+                                        <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal"
+                                        data-shape="{{item["shape"]}}"
+                                        data-type="{{item["type"]}}"
+                                        data-connector="{{item["connector"]}}"
+                                        data-dimension_one="{{item["dimension_one"]}}"
+                                        data-dimension_two="{{item["dimension_two"]}}"
+                                        data-quantity="{{item["quantity"]}}"
+                                        data-availabe_quantity="{{item["available_quantity"]}}"
+                                        data-price="{{item["price"]}}"
+                                        data-id="{{item["id"]}}"
+                                        data-notes="{{item["notes"]}}"
+                                        data-location="{{item["location"]}}"><i class="material-icons">delete</i></button></td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                </table>
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+    </form>
+    {% include "addModal/addModalBtn.html" %}
+    {% include "editModal/editModalBtn.html" %}
+    {% include "deleteModal/deleteModalBtn.html" %}
+    
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+<script src="/static/helpers/validateForm.js"></script>
+<script src="/static/modalJs/eModalValidate.js"></script>
+<script src="/static/modalJs/eModal.js"></script>
+<script src="/static/modalJs/aModal.js"></script>
+<script src="/static/modalJs/dModal.js"></script>
+<script src="/static/modalJs/aModalValidate.js"></script>
+<script src="/static/newOrderJs/aModalSubmit.js"> </script>
+<script src="/static/newOrderJs/dModalSubmit.js"> </script>
+<script src="/static/newOrderJs/eModalSubmit.js"> </script>
+{% endblock %}

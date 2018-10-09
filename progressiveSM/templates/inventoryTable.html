@@ -1,0 +1,63 @@
+<div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th><button type="button" class="btn btn-info" data-toggle="modal" data-target="#addModal"><i class="material-icons">add</i></button></th>
+                    <th scope="col">Shape</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Dimensions</th>
+                    <th scope="col">Connector</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Available Quantity</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Notes</th>
+                    <th scope="col">Location</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id = "tbody"> 
+                {% for item in inventory %}
+                <tr id ={{item["id"]}}>
+                    <td><button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#editModal"
+                    data-shape="{{item["shape"]}}"
+                    data-type="{{item["type"]}}"
+                    data-connector="{{item["connector"]}}"
+                    data-dimension_one="{{item["dimension_one"]}}"
+                    data-dimension_two="{{item["dimension_two"]}}"
+                    data-quantity="{{item["quantity"]}}"
+                    data-available_quantity="{{item["available_quantity"]}}"
+                    data-price="{{item["price"]}}"
+                    data-id="{{item["id"]}}"
+                    data-notes="{{item["notes"]}}"
+                    data-location="{{item["location"]}}"
+                    ><i class="material-icons">edit</i></button></td>
+                    <td> {{item["shape"]}}</td> 
+                    <td> {{item["type"]}}</td>
+                    {% if item["type"] == "Reducer" %}
+                        <td> {{item["dimension_one"]}}": {{item["dimension_two"]}}"</td>
+                    {% else %}
+                        <td> {{item["dimension_one"]}}"</td>
+                    {% endif %}
+                    <td> {{item["connector"]}}</td>
+                    <td> {{item["quantity"]}}</td>
+                    <td> {{item["available_quantity"]}}</td>
+                    <td> ${{item["price"]}}</td>
+                    <td> {{item["notes"]}}</td>
+                    <td> {{item["location"]}}</td>
+                    <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal"
+                    data-shape="{{item["shape"]}}"
+                    data-type="{{item["type"]}}"
+                    data-connector="{{item["connector"]}}"
+                    data-dimension_one="{{item["dimension_one"]}}"
+                    data-dimension_two="{{item["dimension_two"]}}"
+                    data-quantity="{{item["quantity"]}}"
+                    data-availabe_quantity="{{item["available_quantity"]}}"
+                    data-price="{{item["price"]}}"
+                    data-id="{{item["id"]}}"
+                    data-notes="{{item["notes"]}}"
+                    data-location="{{item["location"]}}"><i class="material-icons">delete</i></button></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
