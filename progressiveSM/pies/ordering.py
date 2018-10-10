@@ -18,5 +18,6 @@ def newOrder():
 
 @ordering.route('/addOrder', methods=["GET","POST"])
 def addOrder():
+        return render_template('newOrder.html')
          
 
