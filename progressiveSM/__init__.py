@@ -1,7 +1,6 @@
 from flask import Flask, render_template, flash, redirect, request, session, jsonify
 from flask_session import Session
 from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
 from werkzeug.security import check_password_hash, generate_password_hash
 import os
 import sys
