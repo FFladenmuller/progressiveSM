@@ -17,7 +17,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 db = SQLAlchemy(app)
 
 # Set up flask-migrate with app, a library for changing database in versions
-migrate = Migrate(app, db)
+
 
 @app.after_request
 def after_request(response):
